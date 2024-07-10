@@ -607,6 +607,20 @@ describe('accessibility', () => {
     });
   });
 
+  it('should set role attribute on host element in tabNavigation', async () => {
+    menu.tabNavigation = true;
+    await nextRender(menu);
+    expect(menu.getAttribute('role')).to.equal('group');
+  });
+
+  it('should set role attribute on menu bar buttons in tabNavigation', async () => {
+    menu.tabNavigation = true;
+    await nextRender(menu);
+    buttons.forEach((btn) => {
+      expect(btn.getAttribute('role')).to.equal('button');
+    });
+  });
+
   it('should set aria-haspopup attribute on buttons with nested items', () => {
     buttons.forEach((btn) => {
       const hasPopup = btn === overflow || btn.item.children ? 'true' : null;
